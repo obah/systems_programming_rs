@@ -15,14 +15,14 @@ A simple task manager for the terminal, built as part of my Rust and systems eng
 
 Every command takes the form `<command> [arguments]`.
 
-| Command | Arguments | Example | Description |
-| --- | --- | --- | --- |
-| `add` | `[title]` | `add "buy milk"` | Add a new task. If the title is omitted, you'll be prompted for one. |
-| `list` | — | `list` | Show all active tasks. |
-| `rename` | `<id> <title>` | `rename 1 "buy oat milk"` | Change a task's title. |
-| `complete` | `<id>` | `complete 1` | Mark a task as done. |
-| `pend` | `<id>` | `pend 1` | Move a completed task back to pending. |
-| `delete` | `<id>` | `delete 1` | Remove a task from the list. |
+| Command    | Arguments      | Example                   | Description                                                          |
+| ---------- | -------------- | ------------------------- | -------------------------------------------------------------------- |
+| `add`      | `[title]`      | `add "buy milk"`          | Add a new task. If the title is omitted, you'll be prompted for one. |
+| `list`     | —              | `list`                    | Show all active tasks.                                               |
+| `rename`   | `<id> <title>` | `rename 1 "buy oat milk"` | Change a task's title.                                               |
+| `complete` | `<id>`         | `complete 1`              | Mark a task as done.                                                 |
+| `pend`     | `<id>`         | `pend 1`                  | Move a completed task back to pending.                               |
+| `delete`   | `<id>`         | `delete 1`                | Remove a task from the list.                                         |
 
 ### Running from the repo (no install)
 
@@ -41,9 +41,9 @@ Install the binary into `~/.cargo/bin` and use it directly:
 ```sh
 cargo install --path .
 
-todo_cli add "buy milk"
-todo_cli list
-todo_cli complete 1
+todo add "buy milk"
+todo list
+todo complete 1
 ```
 
 Example `list` output:
