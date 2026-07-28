@@ -1,11 +1,10 @@
 [package]
 name = "todo"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
+version.workspace = true
+edition.workspace = true
+publish = false
 
 [dev-dependencies]
-assert_cmd = "2.2.2"
-predicates = "3.1.4"
-tempfile = "3.27.0"
+assert_cmd.workspace = true
+predicates.workspace = true
+tempfile.workspace = true

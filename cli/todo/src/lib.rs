@@ -1,8 +1,8 @@
 use std::fmt::Display;
 
 pub mod commands;
-pub mod store;
-pub mod task;
+pub(crate) mod store;
+pub(crate) mod task;
 
 #[derive(Debug)]
 pub enum TodoError {

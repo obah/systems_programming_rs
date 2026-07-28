@@ -8,7 +8,7 @@ use predicates::prelude::*;
 use tempfile::TempDir;
 
 fn todo(dir: &TempDir) -> Command {
-    let mut cmd = Command::cargo_bin("todo_cli").unwrap();
+    let mut cmd = Command::cargo_bin("todo").unwrap();
     cmd.current_dir(dir.path());
     cmd
 }

@@ -27,8 +27,8 @@ enum UpdateOp {
     Pend,
 }
 
-pub fn get_user_input(prompt: &str) -> Result<String, TodoError> {
-    println!("{}", prompt);
+fn prompt(message: &str) -> Result<String, TodoError> {
+    println!("{message}");
     let mut input = String::new();
     io::stdin().read_line(&mut input)?;
     Ok(input.trim().to_string())
@@ -85,17 +85,17 @@ fn run_add(title: Option<String>) -> Result<(), TodoError> {
     let task_title = if let Some(t) = title {
         t
     } else {
-        get_user_input("Enter title for new task: ")?
+        prompt("Enter title for new task: ")?
     };
 
-    let (mut file, mut tasks) = get_tasks()?;
+    let (mut file, mut tasks) = open_store()?;
 
     let id: u32 = tasks.iter().map(|t| t.id).max().unwrap_or(0) + 1;
 
     let new_task = Task::new(id, task_title);
     tasks.push(new_task);
 
-    store::save_all_tasks(&mut file, &tasks)?;
+    store::save(&mut file, &tasks)?;
 
     println!("New task added!");
 
@@ -103,11 +103,11 @@ fn run_add(title: Option<String>) -> Result<(), TodoError> {
 }
 
 fn run_update(id: u32, op: UpdateOp, success_msg: &str) -> Result<(), TodoError> {
-    let (mut file, mut tasks) = get_tasks()?;
+    let (mut file, mut tasks) = open_store()?;
 
     update_task(&mut tasks, id, op)?;
 
-    store::save_all_tasks(&mut file, &tasks)?;
+    store::save(&mut file, &tasks)?;
 
     println!("Task {success_msg}!");
 
@@ -131,7 +131,7 @@ fn update_task(tasks: &mut [Task], id: u32, operation: UpdateOp) -> Result<(), T
 }
 
 fn run_list() -> Result<(), TodoError> {
-    let (_, tasks) = get_tasks()?;
+    let (_, tasks) = open_store()?;
 
     let tasks = tasks.into_iter().filter(|t| !t.deleted);
 
@@ -147,9 +147,9 @@ fn run_list() -> Result<(), TodoError> {
     Ok(())
 }
 
-fn get_tasks() -> Result<(File, Vec<Task>), TodoError> {
-    let mut file = store::open_or_create_todo()?;
-    let tasks = store::get_tasks(&mut file)?;
+fn open_store() -> Result<(File, Vec<Task>), TodoError> {
+    let mut file = store::open()?;
+    let tasks = store::load(&mut file)?;
 
     Ok((file, tasks))
 }
