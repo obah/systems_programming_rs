@@ -1,0 +1,7 @@
+[package]
+name = "calc_mini_interpreter"
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[dependencies]
