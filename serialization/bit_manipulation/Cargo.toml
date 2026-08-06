@@ -1,0 +1,6 @@
+[package]
+name = "bit_manipulation"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
