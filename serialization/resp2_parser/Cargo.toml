@@ -1,0 +1,6 @@
+[package]
+name = "resp2_parser"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
